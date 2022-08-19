@@ -214,7 +214,7 @@ try{
               << " OFPUNIV " << conf->nOFPUV
               << " ORB " << conf->nORB
               << " OBack " << conf->nOBack
-              << " OFPDly " << conf->nOFPDly
+              << " UnivDly " << conf->nOUnivDly
               << " CML " << conf->nCML
               << " Kind " << static_cast<int>(conf->kind)
               << " IFP " << conf->nIFP
@@ -236,9 +236,19 @@ try{
         outputs[std::make_pair(OutputFPUniv, i)] = new MRMOutput(SB() << n << ":FrontUnivOut" << i, this, OutputFPUniv, i);
     }
 
-    delays.resize(conf->nOFPDly);
-    for(unsigned int i=0; i<conf->nOFPDly; i++){
-        delays[i] = new DelayModule(SB() << n << ":UnivDlyModule" << i, this, i);
+    delays.resize(conf->nOUnivDly);
+    for(unsigned int i=0; i<conf->nOUnivDly; i++){
+        if(formfactor==formFactor_PCIe) {
+            delays[i] = new DelayModuleRP(SB() << n << ":UnivDlyModule" << i, this, i);
+        } else if(formfactor==formFactor_mTCA) {
+            if(i<2){
+                delays[i] = new DelayModule(SB() << n << ":UnivDlyModule" << i, this, i);
+            } else {
+                delays[i] = new DelayModuleRP(SB() << n << ":UnivDlyModule" << i, this, i-2);
+            }
+        } else {
+            delays[i] = new DelayModule(SB() << n << ":UnivDlyModule" << i, this, i);
+        }
     }
 
     for(unsigned int i=0; i<conf->nORB; i++){

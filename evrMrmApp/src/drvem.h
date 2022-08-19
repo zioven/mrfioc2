@@ -36,6 +36,7 @@
 #include "drvemCML.h"
 #include "drvemTSBuffer.h"
 #include "delayModule.h"
+#include "delayModuleRP.h"
 #include "drvemRxBuf.h"
 #include "mrmevrseq.h"
 #include "mrmspi.h"
@@ -109,7 +110,8 @@ public:
         size_t nPS;   // number of prescalers
         // # of outputs (Front panel, FP Universal, Rear transition module, Backplane)
         size_t nOFP, nOFPUV, nORB, nOBack;
-        size_t nOFPDly;  // # of slots== # of delay modules. Some of the FP Universals have GPIOs. Each FPUV==2 GPIO pins, 2 FPUVs in one slot = 4 GPIO pins. One dly module uses 4 GPIO pins.
+        // Number of fine delay modules.
+        size_t nOUnivDly;
         // # of CML outputs
         size_t nCML;
         MRMCML::outkind kind;
@@ -273,7 +275,7 @@ private:
     typedef std::map<std::pair<OutputType,epicsUInt32>,MRMOutput*> outputs_t;
     outputs_t outputs;
 
-    std::vector<DelayModule*> delays;
+    std::vector<DelayModuleEvr*> delays;
 
     typedef std::vector<MRMPreScaler*> prescalers_t;
     prescalers_t prescalers;

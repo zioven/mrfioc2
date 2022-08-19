@@ -100,7 +100,7 @@ static const EVRMRM::Config cpci_evr_230 = {
     4,  // FPUV outputs
     0,  // RB outputs
     0,  // Backplane outputs
-    2,  // FP Delay outputs
+    2,  // Univ. IO Delay outputs
     0,  // CML/GTX outputs
     MRMCML::typeCML,
     2,  // FP inputs
@@ -114,7 +114,7 @@ static const EVRMRM::Config pmc_evr_230 = {
     0,  // FPUV outputs
     10, // RB outputs
     0,  // Backplane outputs
-    0,  // FP Delay outputs
+    0,  // Univ. IO Delay outputs
     0,  // CML/GTX outputs
     MRMCML::typeCML,
     1,  // FP inputs
@@ -128,7 +128,7 @@ static const EVRMRM::Config pcie_evr_230 = {
     16, // FPUV outputs
     0,  // RB outputs
     0,  // Backplane outputs
-    0,  // FP Delay outputs
+    0,  // Univ. IO Delay outputs
     0,  // CML/GTX outputs
     MRMCML::typeCML,
     0,  // FP inputs
@@ -142,7 +142,7 @@ static const EVRMRM::Config vme_evrrf_230 = { // no way to distinguish RF and no
     4,  // FPUV outputs
     16, // RB outputs
     0,  // Backplane outputs
-    2,  // FP Delay outputs
+    2,  // Univ. IO Delay outputs
     3,  // CML/GTX outputs
     MRMCML::typeCML,
     2,  // FP inputs
@@ -156,7 +156,7 @@ static const EVRMRM::Config cpci_evrtg_300 = {
     4,  // FPUV outputs
     0,  // RB outputs
     0,  // Backplane outputs
-    0,  // FP Delay outputs
+    0,  // Univ. IO Delay outputs
     4,  // CML/GTX outputs
     MRMCML::typeTG300,
     0,  // FP inputs
@@ -170,7 +170,7 @@ static const EVRMRM::Config cpci_evr_300 = {
     12, // FPUV outputs
     0,  // RB outputs
     0,  // Backplane outputs
-    0,  // FP Delay outputs
+    0,  // Univ. IO Delay outputs
     4,  // CML/GTX outputs
     MRMCML::typeTG300,
     2,  // FP inputs
@@ -199,7 +199,7 @@ static const EVRMRM::Config mtca_evr_300rf = {
     2,  // FPUV outputs (only FPUV0/1, mapped to FrontUnivOut0/1, FPUV2/3 mapped in the code to FrontUnivOut18/19)
     10, // RB outputs  (RTM)
     8,  // Backplane outputs
-    2,  // FP Delay outputs
+    7,  // Univ. IO Delay outputs
     6,  // CML/GTX outputs - CLKA/B, 1x UNIV I/O slot (2 outputs), 1x SFP, 1x CML
     MRMCML::typeCML,
     /**
@@ -218,7 +218,7 @@ static const EVRMRM::Config mtca_evr_300u = { // with UNIV slots on FP
     4,  // FPUV outputs
     10, // RB outputs  (RTM)
     8,  // Backplane outputs
-    2,  // FP Delay outputs
+    7,  // Univ. IO Delay outputs
     2,  // CML/GTX outputs - CLKA/B
     MRMCML::typeCML,
     /**
@@ -237,7 +237,7 @@ static const EVRMRM::Config mtca_evr_300 = {
     4,  // Univ outputs
     10, // RB outputs (10 EVRTM)
     8,  // Backplane outputs
-    2,  // FP Delay outputs
+    5,  // Univ. IO Delay outputs
     2,  // CML/GTX outputs - CLKA/B
     MRMCML::typeCML,
     /**
@@ -257,7 +257,7 @@ static const EVRMRM::Config mtca_evr_300ifb = {
     0,  // FPUV outputs
     10, // RB outputs  (via external IFB)
     8,  // Backplane outputs
-    0,  // FP Delay outputs
+    0,  // Univ. IO Delay outputs
     2,  // CML/GTX outputs
     MRMCML::typeCML,
     /**
@@ -276,7 +276,7 @@ static const EVRMRM::Config pcie_evr_300 = {
     16, // FPUV outputs  (via external IFB)
     0,  // RB outputs
     0,  // Backplane outputs
-    0,  // FP Delay outputs
+    4,  // Univ. IO Delay outputs
     0,  // CML/GTX outputs
     MRMCML::typeCML,
     /**
@@ -294,7 +294,7 @@ static const EVRMRM::Config cpci_evr_unknown = {
     2,  // FPUV outputs
     1,  // RB outputs
     1,  // Backplane outputs
-    1,  // FP Delay outputs
+    1,  // Univ. IO Delay outputs
     1,  // CML/GTX outputs
     MRMCML::typeCML,
     1,  // FP inputs

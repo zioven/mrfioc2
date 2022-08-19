@@ -386,8 +386,13 @@
 
 #define U32_SFPEEPROM_base 0x8200
 #define U32_SFPEEPROM(N) (U32_SFPEEPROM_base + (N))
+
 #define U32_SFPDIAG_base 0x8300
 #define U32_SFPDIAG(N) (U32_SFPDIAG_base + (N))
+
+// Rear Transition Module Delay
+#define U32_RTMDLY_base 0x8400
+#define U32_RTMDLY(N) (U32_RTMDLY_base + 4*(N))
 
 #define EVR_REGMAP_SIZE 0x40000 // Total register map size = 256K
 
