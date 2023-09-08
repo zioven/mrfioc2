@@ -29,6 +29,7 @@ public:
     struct ID {
         /* vendors
          *   0x20 - Micron
+         *   0xef - Winbond
          */
         epicsUInt8 vendor,
                    dev_type,
@@ -36,7 +37,7 @@ public:
 
         const char *vendorName;
         epicsUInt32 capacity, //!< total capacity in bytes
-                    sectorSize, //!< SECTOR ERASE (0xd8) size in bytes.  Always a power of 2
+                    sectorSize, //!< SECTOR ERASE (0xd8 / 0x20) size in bytes.  Always a power of 2
                     pageSize;   //!< PAGE PROGRAM (0x02) size in bytes.  Always a power of 2
 
         std::vector<epicsUInt8> SN;

@@ -114,6 +114,19 @@ CFIFlash::readID(ID *id)
             }
         }
     }
+    else if(id->vendor == 0xef)
+    {
+        id->vendorName = "Winbond";
+
+        switch(id->dev_type) {
+        case 0x60: // W25Q128JW-IQ
+        case 0x80: // W25Q128JW-IM
+            id->capacity = 1u<<(id->dev_id);
+            id->sectorSize = 256*16u;
+            id->pageSize = 256;
+            break;
+        }
+    }
 
     // we only use 24-bit read/write/erase ops
     // so capacity beyond 16MB is not accessible.
@@ -182,6 +195,20 @@ void CFIFlash::write(const epicsUInt32 start,
             throw std::runtime_error("end address not aligned to page & sector sizes");
     }
 
+    epicsUInt8 sectorEraseCmd;
+    if (strcmp(info.vendorName, "Micron") == 0)
+    {
+        sectorEraseCmd = 0xd8; // SECTOR ERASE
+    }
+    else if (strcmp(info.vendorName, "Winbond") == 0)
+    {
+        sectorEraseCmd = 0x20; // SECTOR ERASE
+    }
+    else
+    {
+        throw std::runtime_error("unknown vendor name");
+    }
+
     const epicsUInt32 end = start+count;
 
     const double timeout = dev.interface()->timeout();
@@ -198,7 +225,7 @@ void CFIFlash::write(const epicsUInt32 start,
             WE.enable();
 
             epicsUInt8 cmd[4];
-            cmd[0] = 0xd8; // SECTOR ERASE
+            cmd[0] = sectorEraseCmd;
             cmd[1] = (addr>>16)&0xff;
             cmd[2] = (addr>> 8)&0xff;
             cmd[3] = (addr>> 0)&0xff;
@@ -296,6 +323,20 @@ void CFIFlash::erase(epicsUInt32 start, epicsUInt32 count, bool strict)
             throw std::runtime_error("end address not aligned to page & sector sizes");
     }
 
+    epicsUInt8 sectorEraseCmd;
+    if (strcmp(info.vendorName, "Micron") == 0)
+    {
+        sectorEraseCmd = 0xd8; // SECTOR ERASE
+    }
+    else if (strcmp(info.vendorName, "Winbond") == 0)
+    {
+        sectorEraseCmd = 0x20; // SECTOR ERASE
+    }
+    else
+    {
+        throw std::runtime_error("unknown vendor name");
+    }
+
     const epicsUInt32 end = start+count;
 
     const double timeout = dev.interface()->timeout();
@@ -311,7 +352,7 @@ void CFIFlash::erase(epicsUInt32 start, epicsUInt32 count, bool strict)
         WE.enable();
 
         epicsUInt8 cmd[4];
-        cmd[0] = 0xd8; // SECTOR ERASE
+        cmd[0] = sectorEraseCmd;
         cmd[1] = (addr>>16)&0xff;
         cmd[2] = (addr>> 8)&0xff;
         cmd[3] = (addr>> 0)&0xff;
