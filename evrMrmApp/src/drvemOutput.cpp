@@ -122,7 +122,13 @@ MRMOutput::setSourceInternal()
 {
     epicsUInt32 regval = shadowSource;
     if(!isEnabled)
-        regval = 0x3f3f; // Force Low  (TODO: when to tri-state?)
+    {
+        regval = 0x3f3f; // Force Low
+        if (type == OutputBackplane)
+        {
+            regval = 0x3d3d; // Tri-State for backplane lines when OFF.
+        }
+    }
 
     epicsUInt32 val=63;
     switch(type) {
